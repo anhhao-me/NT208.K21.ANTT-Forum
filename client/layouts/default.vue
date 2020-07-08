@@ -82,7 +82,15 @@
                   <b-form-group>
                     <div class="d-flex justify-content-between">
                       <b-button @click="login">Đăng nhập</b-button>
-                      <nuxt-link to="forgot" style="line-height: 40px;">Quên mật khẩu </nuxt-link>
+                      <a href="#" v-b-modal.forgot-password style="line-height: 40px;">Quên mật khẩu </a>
+                      <b-modal id="forgot-password" title="Quên mật khẩu" @show="forgotForm.email = ''; forgotForm.password = ''" @ok="makeForgot">
+                        <b-form-group label="Email">
+                          <b-input v-model="forgotForm.email"/>
+                        </b-form-group>
+                        <b-form-group label="Password">
+                          <b-input v-model="forgotForm.password"/>
+                        </b-form-group>
+                      </b-modal>
                     </div>
                   </b-form-group>
                 </b-col>
@@ -134,6 +142,10 @@ export default {
   },
   data(){
     return {
+      forgotForm: {
+        email: '',
+        password: ''
+      },
       createUserForm: {
         error: '',
         username: '',
@@ -355,6 +367,29 @@ export default {
 
     captchaVerified(res){
       console.log(res);
+    },
+
+    async makeForgot(){
+      try {
+        const { id, message } = await this.$axios.$post(`/user/password/reset/`, this.forgotForm);
+
+        if (id){
+          this.notify({
+            msg: `Đã đổi mật khẩu`,
+            variant: 'success'
+          });
+        } else {
+          this.notify({
+            msg: message,
+            variant: 'danger'
+          });
+        }
+      } catch(err){
+        this.notify({
+          msg: `Đã xảy ra lỗi - ${err.message}`,
+          variant: 'danger'
+        });
+      };
     }
   },
   async mounted(){
