@@ -88,7 +88,7 @@
                           <b-input v-model="forgotForm.email"/>
                         </b-form-group>
                         <b-form-group label="Password">
-                          <b-input v-model="forgotForm.password"/>
+                          <b-input type="password" v-model="forgotForm.password"/>
                         </b-form-group>
                       </b-modal>
                     </div>
