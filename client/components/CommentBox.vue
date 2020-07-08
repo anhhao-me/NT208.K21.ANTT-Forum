@@ -11,7 +11,7 @@
         </small>
       </i>
     </p>
-    <div v-html="comment.content"></div>
+    <div class="content" v-html="comment.content"></div>
     <div class="text-right">
       <!--div class="badge text-danger">371 lượt thích</div>
       <b-button variant="outline-danger" size="sm">Thích</b-button-->
