@@ -318,13 +318,12 @@ export default {
     async facebookLogin(data){
       this.onload();
       try {
-        console.log(data, data.authResponse, data.authResponse.access_token)
         const raw = await this.$axios.$post('/auth/convert-token', {
             client_id: 'BkVOSUdDY0az5crvutWgR7E4a0maPjvIisrL1rbC',
             client_secret: '00cacKL5FYOqXZdl17dSfNaCGJUJCzmUijDcyWAj1QPs69KpiZtwyhLrQcItAMbIoMb1wZ55jRNRa8DK9A1vSRbpStQvsctZ8I2p90d5YMroLX3L7h2SGHQvUfIOxwcf',
             grant_type: 'convert_token',
             backend: 'facebook-oauth2',
-            token: data.authResponse.access_token
+            token: data.authResponse.accessToken
           });
 
         if (typeof raw === 'object' && raw.message){
