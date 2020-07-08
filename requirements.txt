@@ -1,2 +1,11 @@
-Django==2.1.3
-psycopg2
+Django==3.0.7
+Pillow==7.1.2
+asgiref==3.2.7
+djangorestframework==3.11.0
+pip==20.1.1
+psycopg2==2.8.5
+pytz==2020.1
+setuptools==47.1.1
+sqlparse==0.3.1
+django-oauth-toolkit==1.3.2
+django-rest-framework-social-oauth2==1.1.0
