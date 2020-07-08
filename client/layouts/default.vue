@@ -122,7 +122,7 @@
         <b-row>
           <b-col cols="12" lg="6">
             <p>Lập trình ứng dụng Web - NT208.K21.ANTT</p>
-            <p>GV Lý Thuyết: <b>Trần Tuấn Dũng</b></p>
+            <p>GV Lý Thuyết: <b><a href="https://dungtran.top/" target="_blank">Trần Tuấn Dũng<a></b></p>
           </b-col>
           <b-col cols="12" lg="6">
             <p><b>NHÓM 9</b></p>
