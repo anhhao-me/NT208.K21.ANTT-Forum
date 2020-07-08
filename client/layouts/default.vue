@@ -322,7 +322,7 @@ export default {
             client_id: 'BkVOSUdDY0az5crvutWgR7E4a0maPjvIisrL1rbC',
             client_secret: '00cacKL5FYOqXZdl17dSfNaCGJUJCzmUijDcyWAj1QPs69KpiZtwyhLrQcItAMbIoMb1wZ55jRNRa8DK9A1vSRbpStQvsctZ8I2p90d5YMroLX3L7h2SGHQvUfIOxwcf',
             grant_type: 'convert_token',
-            backend: 'facebook-oauth2',
+            backend: 'facebook',
             token: data.authResponse.accessToken
           });
 
