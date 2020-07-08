@@ -68,7 +68,7 @@
             </b-modal>
             <b-modal id="login" title="Đăng nhập" hide-footer @show="initLoginForm" size="lg">
               <b-row>
-                <b-col cols="6">
+                <b-col cols="12" lg="6">
                   <b-alert v-if="loginForm.error" variant="danger" show>{{ loginForm.error }}</b-alert>
                   <b-form-group label="Tên đăng nhập">
                     <b-input type="text" v-model="loginForm.username"></b-input>
@@ -94,7 +94,7 @@
                     </div>
                   </b-form-group>
                 </b-col>
-                <b-col cols="6">
+                <b-col cols="12" lg="6">
                   <div class="text-center">
                     <GoogleLogin :params="google.params" :onSuccess="googleLogin" :renderParams="google.renderParams" class="d-inline-block mb-3">Google</GoogleLogin>
                     <v-facebook-login app-id="930342367440752" @login="facebookLogin" 
