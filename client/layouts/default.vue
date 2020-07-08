@@ -315,7 +315,7 @@ export default {
       this.outload();
     },
 
-    facebookLogin(data){
+    async facebookLogin(data){
       this.onload();
       try {
         const raw = await this.$axios.$post('/auth/convert-token', {
