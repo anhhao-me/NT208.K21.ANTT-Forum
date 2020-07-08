@@ -1,4 +1,4 @@
-const apiURL = 'https://xanh.life/api';
+const apiURL = 'http://website.local/api';
 
 export default {
   mode: 'spa',

@@ -123,7 +123,19 @@ AUTHENTICATION_BACKENDS = (
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookAppOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '930342367440752'
+SOCIAL_AUTH_FACEBOOK_SECRET = '407335ecfa5542a047c1d13879faed6d'
+
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
+# Email is not sent by default, to get it, you must request the email permission.
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
 
 # Google configuration
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '965256596934-rlfod4luu67jjjiaqvr9oiiass8sunbb.apps.googleusercontent.com'

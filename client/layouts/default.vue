@@ -316,7 +316,41 @@ export default {
     },
 
     facebookLogin(data){
-      console.log(data);
+      this.onload();
+      try {
+        const raw = await this.$axios.$post('/auth/convert-token', {
+            client_id: 'BkVOSUdDY0az5crvutWgR7E4a0maPjvIisrL1rbC',
+            client_secret: '00cacKL5FYOqXZdl17dSfNaCGJUJCzmUijDcyWAj1QPs69KpiZtwyhLrQcItAMbIoMb1wZ55jRNRa8DK9A1vSRbpStQvsctZ8I2p90d5YMroLX3L7h2SGHQvUfIOxwcf',
+            grant_type: 'convert_token',
+            backend: 'facebook-oauth2',
+            token: data.authResponse.access_token
+          });
+
+        if (typeof raw === 'object' && raw.message){
+          throw new Error(raw.message);
+        }
+
+        this.$axios.setHeader('Authorization', `Bearer ${raw.access_token}`);
+
+        const { user } = await this.$axios.$get('/me/');
+        this.saveUserSession({
+          token: raw.access_token,
+          user
+        });
+
+        this.notify({
+          msg: 'Đăng nhập thành công!',
+          variant: 'success'
+        });
+        this.$bvModal.hide('login');
+      } catch(err){
+        this.notify({
+          msg: `Đã xảy ra lỗi - ${err.message}`,
+          variant: 'danger'
+        });
+      };
+
+      this.outload();
     },
 
     captchaVerified(res){
