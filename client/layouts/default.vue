@@ -117,10 +117,24 @@
       </b-collapse>
     </b-navbar>
     <nuxt />
-    <div class="site-footer text-center my-3">
-      <small>
-        <i>Copyright 2020 &copy; XANH.LIFE</i>
-      </small>
+    <div class="site-footer bg-dark text-light py-3 mt-3">
+      <b-container>
+        <b-row>
+          <b-col cols="12" lg="6">
+            <p>Lập trình ứng dụng Web - NT208.K21.ANTT</p>
+            <p>GV Lý Thuyết: <b>Trần Tuấn Dũng</b></p>
+          </b-col>
+          <b-col cols="12" lg="6">
+            <p><b>NHÓM 9</b></p>
+            <ul>
+              <li>16521121- Nguyễn Hoàng Thiên Thanh</li>
+              <li>17520224- Trần Quốc An</li>
+              <li>17520452- Vũ Anh Hào </li>
+              <li>16520430- Nguyễn Trần Hoàn</li>
+            </ul>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
