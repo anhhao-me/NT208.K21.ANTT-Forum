@@ -54,7 +54,7 @@
         <h5>THẢO LUẬN</h5>
         <b-card class="my-3" v-for="comment in makeTree(comments)" :key="`comment-${comment.id}`">
           <b-card-text>
-            <comment-box :comment="comment" @reply="makeReply" @edit="editComment"></comment-box>
+            <comment-box :comment="comment" @reply="makeReply" @edit="editComment" :topic="topic"></comment-box>
           </b-card-text>
         </b-card>
         <b-modal title="Chỉnh sửa bình luận" id="edit-comment" @ok="makeEditComment">

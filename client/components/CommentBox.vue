@@ -13,15 +13,14 @@
     </p>
     <div class="content" v-html="comment.content"></div>
     <div class="text-right">
-      <!--div class="badge text-danger">371 lượt thích</div>
-      <b-button variant="outline-danger" size="sm">Thích</b-button-->
-      <b-button :variant="!commentLiked ? 'danger' : 'outline-danger'" size="sm" @click="toggleLikeComment" v-if="user">{{ !commentLiked ? 'Thích' : 'Đã thích' }}</b-button>
+      <div class="badge text-danger">{{ likeCount }} lượt thích</div>
+      <b-button :variant="!commentLiked ? 'danger' : 'outline-danger'" size="sm" @click="toggleLikeComment">{{ !commentLiked ? 'Thích' : 'Đã thích' }}</b-button>
       <b-button variant="outline-secondary" size="sm" v-if="user && comment.user_id === user.id" @click="editComment(comment)">Chỉnh sửa</b-button>
       <b-button variant="outline-primary" size="sm" href="#comment-box" @click="makeReply(comment)">Trả lời</b-button>
     </div>
 
     <div v-if="comment.children" class="mt-3">
-      <comment-box :comment="subcomment" v-for="subcomment in comment.children" :key="`comment-${subcomment.id}`" @reply="makeReply" @edit="editComment"></comment-box>
+      <comment-box :comment="subcomment" v-for="subcomment in comment.children" :key="`comment-${subcomment.id}`" @reply="makeReply" @edit="editComment" :topic="topic"></comment-box>
     </div>
   </b-media>
 </template>
@@ -38,17 +37,21 @@ export default {
   },
   data(){
     return {
-      commentLiked: false
+      commentLiked: false,
+      likeCount: 0
     }
   },
   name: 'comment-box',
   props: [
-    'comment'
+    'comment',
+    'topic'
   ],
   computed: {
     ...mapState(['user']),
   },
   methods: {
+    ...mapMutations(['onload', 'outload', 'notify']),
+
     makeReply(comment){
       this.$emit('reply', comment);
     },
@@ -72,17 +75,18 @@ export default {
 
       this.onload();
       try {
-        const tid = await this.$axios.$post('/topic/liked/', {
+        const tid = await this.$axios.$post('/comment/liked/', {
           user_id: this.user.id,
-          topic_id: this.topic.id
+          topic_id: this.topic.id,
+          comment_id: this.comment.id
         });
         
         if (tid){
-          this.topicLiked = true;
+          this.commentLiked = true;
           this.likeCount++;
           // this.notify({ msg: 'Đã thích!', variant: 'success'});
         } else {
-          this.topicLiked = false;
+          this.commentLiked = false;
           this.likeCount--;
           // this.notify({ msg: 'Đã bỏ thích!', variant: 'success'});
         }
@@ -91,6 +95,13 @@ export default {
       }
       this.outload();
     },
+  },
+  async mounted(){
+    this.onload();
+    await this.toggleLikeComment();
+    await this.toggleLikeComment();
+    this.likeCount = (await this.$axios.$get(`/comment/${this.comment.id}/likes/`)).number_of_likes || 0;
+    this.outload();
   }
 }
 </script>
