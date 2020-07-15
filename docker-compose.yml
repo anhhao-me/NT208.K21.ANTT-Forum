@@ -6,6 +6,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - '5432'
+    networks:
+      - app-network
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
@@ -15,5 +17,25 @@ services:
       - '8000:8000'
     depends_on:
       - db
+    networks:
+      - app-network
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3000:60000"
+      - "3001:60001"
+    volumes:
+      - ./client:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - web
+    networks:
+      - app-network
 volumes:
   postgres_data:
+networks:
+  app-network:
+    driver: bridge

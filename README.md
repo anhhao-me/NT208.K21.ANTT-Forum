@@ -1,35 +1,17 @@
-## Setup
+# FORUM
 
-build and up containers
+_LẬP TRÌNH ỨNG DỤNG WEB - NT208.K21 - NHÓM 9_
 
-```
-docker-compose up
-```
+## Thành viên
 
-run migrations
+- 16521121- Nguyễn Hoàng Thiên Thanh
+- 17520224- Trần Quốc An
+- 17520452- Vũ Anh Hào
+- 16520430- Nguyễn Trần Hoàn
 
-```
-docker-compose run web python3 manage.py migrate
-```
+## Cài đặt
 
-create a user for admin
+### Linux
 
-```
-docker-compose run web python manage.py createsuperuser
-```
+### Windows
 
-## django-admin example
-
-The branch admin_example has an example app in django-admin.
-
-You can learn how the app was made with the commits.
-
-#### features implemented:
-  * filters
-  * custom fields in table
-  * custom actions buttons in table
-  * relations one to many
-  * add css for a source
-  * add global css
-  * modify admin html (dashboard)
-  * custom form distribution

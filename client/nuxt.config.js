@@ -1,5 +1,6 @@
 // const apiURL = 'http://website.local/api';
-const apiURL = 'https://xanh.life/api';
+// const apiURL = 'https://xanh.life/api';
+const apiURL = '/api';
 
 export default {
   mode: 'spa',
