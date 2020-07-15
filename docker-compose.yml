@@ -3,13 +3,14 @@ services:
   db:
     image: postgres:10.1-alpine
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - '5432'
     networks:
       - app-network
   web:
-    build: .
+    build: ./django
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./uit:/code
@@ -25,10 +26,10 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3000:60000"
-      - "3001:60001"
+      - "3000:3000"
+      - "3001:3001"
     volumes:
-      - ./client:/var/www
+      - ./dist:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - web
